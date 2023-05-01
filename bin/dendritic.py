@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 
 from process import load_names, merge_datasets
@@ -17,6 +19,7 @@ data_names = [
 ]
 
 if __name__ == '__main__':
+    print(os.getcwd())
     datasets, genes_list, n_cells = load_names(data_names)
     datasets, genes = merge_datasets(datasets, genes_list)
     datasets_dimred, genes = process_data(datasets, genes)

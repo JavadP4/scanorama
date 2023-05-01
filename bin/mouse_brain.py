@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 from scanorama import *
 from scipy.sparse import vstack
@@ -27,6 +29,7 @@ data_names = [
 ]
 
 if __name__ == '__main__':
+    print(os.getcwd())
     process(data_names, min_trans=100)
 
     datasets, genes_list, n_cells = load_names(data_names)

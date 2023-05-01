@@ -21,7 +21,6 @@ def load_tab(fname, max_genes=40000):
             header = f.readline().decode('utf-8').rstrip().split('\t')
         else:
             header = f.readline().rstrip().split('\t')
-            
         cells = header[1:]
         X = np.zeros((len(cells), max_genes))
         genes = []

@@ -165,10 +165,13 @@ def integrate(datasets_full, genes_list, batch_size=BATCH_SIZE,
     np.random.seed(seed)
     random.seed(seed)
 
+    # check to see whether datasets are numpy array or scipy.sparse.csr_matrix
     datasets_full = check_datasets(datasets_full)
 
+    # retaining only common genes
     datasets, genes = merge_datasets(datasets_full, genes_list,
                                      ds_names=ds_names, union=union)
+    # normalization and dim reduction (using only keep highly variable genes if specified)
     datasets_dimred, genes = process_data(datasets, genes, hvg=hvg,
                                           dimred=dimred)
 
@@ -183,6 +186,8 @@ def integrate(datasets_full, genes_list, batch_size=BATCH_SIZE,
         )
 
     else:
+        # "Merges" datasets by correcting gene expression
+        # values (by finding alignments between datasets and uses them to construct panoramas) .
         datasets_dimred = assemble(
             datasets_dimred, # Assemble in low dimensional space.
             verbose=verbose, knn=knn, sigma=sigma, approx=approx,
